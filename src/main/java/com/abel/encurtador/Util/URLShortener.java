@@ -1,6 +1,5 @@
 package com.abel.encurtador.Util;
 
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Random;
@@ -75,29 +74,36 @@ public class URLShortener {
         return longURL;
     }
 
-    // Validate URL
-    // not implemented, but should be implemented to check whether the given URL
-    // is valid or not
-    boolean validateURL(String url) {
-        return true;
+    // Verifica se é uma URL válida
+    private boolean validateURL(String url) {
+        try {
+            new URL(url).toURI();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
-    // sanitizeURL
-    // This method should take care various issues with a valid url
-    // e.g. www.google.com,www.google.com/, http://www.google.com,
-    // http://www.google.com/
-    // all the above URL should point to same shortened URL
-    // There could be several other cases like these.
+
+    // Trata a URL para que tenha http no URL
     String sanitizeURL(String url) {
-        if (url.substring(0, 7).equals("http://"))
-            url = url.substring(7);
+        // Caso haja espaço na url
+        url = url.replace(" ","");
 
-        if (url.substring(0, 8).equals("https://"))
-            url = url.substring(8);
-
-        if (url.charAt(url.length() - 1) == '/')
+        // Verifica se o ultimo caracter da url é /
+        while (url.charAt(url.length()-1) == '/') {
             url = url.substring(0, url.length() - 1);
-        return url;
+        }
+
+        // Se ja houver http
+        if (url.substring(0, 7).equals("http://")) {
+            return url;
+        }
+        // Se ja houver https
+        if (url.substring(0, 8).equals("https://")) {
+            return url;
+        }
+        return "http://" + url;
     }
 
     /*
