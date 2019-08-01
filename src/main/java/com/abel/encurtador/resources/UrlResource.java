@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.net.URL;
 
 
 @RestController
@@ -23,6 +22,8 @@ public class UrlResource {
         URLShortener uc = new URLShortener(5, "https://encurtadorx.herokuapp.com/"); // Tamanho e Dominio
         Url aux;
 
+        // Garante que a url longa terá http ou https
+        obj.setLongUrl(uc.sanitizeURL(obj.getLongUrl()));
         // Verifica se o hash gerado tem colisoes
         do {
             obj.setShortUrl(uc.shortenURL(obj.getLongUrl()));
@@ -33,7 +34,6 @@ public class UrlResource {
         if(obj.getShortUrl() == "") {
             return ResponseEntity.badRequest().build();
         }
-
         // Se nao houveram colisoes chama o salvar
         aux = service.saveUrl(obj);
         return ResponseEntity.ok().body(aux);

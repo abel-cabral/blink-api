@@ -86,7 +86,7 @@ public class URLShortener {
 
 
     // Trata a URL para que tenha http no URL
-    String sanitizeURL(String url) {
+    public String sanitizeURL(String url) {
         // Caso haja espaço na url
         url = url.replace(" ","");
 
