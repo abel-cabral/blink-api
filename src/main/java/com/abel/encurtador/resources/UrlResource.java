@@ -17,7 +17,7 @@ public class UrlResource {
     @Autowired
     private UrlService service;
 
-    @PostMapping("/encurtador")
+    @PostMapping("/api/encurtador")
     ResponseEntity<Url> encurteUrl(@RequestBody Url obj) {
         URLShortener uc = new URLShortener(5, "https://encurtadorx.herokuapp.com/"); // Tamanho e Dominio
         Url aux;
