@@ -19,7 +19,7 @@ public class UrlResource {
 
     @PostMapping("/api/encurtador")
     ResponseEntity<Url> encurteUrl(@RequestBody Url obj) {
-        URLShortener uc = new URLShortener(5, "https://rxls.herokuapp.com/"); // Tamanho e Dominio
+        URLShortener uc = new URLShortener(5, "blk.abelcode.dev/"); // Tamanho e Dominio
         Url aux;
 
         // Garante que a url longa terá http ou https
