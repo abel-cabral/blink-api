@@ -1,4 +1,7 @@
-# Use uma imagem base que inclui o JDK 1.8 e Maven pré-instalados
+# Limita Capacidade de Recursos no Build da Imagem
+ARG MAX_CPU=0.5
+ARG MAX_MEMORY=256M
+
 FROM maven:3.8.4-openjdk-8 AS build
 
 # Define o diretório de trabalho dentro do contêiner
