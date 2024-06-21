@@ -31,3 +31,6 @@ build/
 .vscode/
 
 src/main/resources/
+
+# Local environment
+.env
